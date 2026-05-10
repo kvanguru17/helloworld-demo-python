@@ -15,6 +15,7 @@ jobs:
         with:
           username: DOCKER_USERNAME
           password: DOCKER_PASSWORD
+          #updated the password in variable
 
       # 3. Build Docker image
       - name: Build Docker image
