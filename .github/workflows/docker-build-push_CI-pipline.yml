@@ -19,7 +19,7 @@ jobs:
           
       # 3. Build Docker image
       - name: Build Docker image
-        run: docker build -t kum18/helloworld-python:v1 -f Docker/Dockerfile
+        run: docker build -t kum18/helloworld-python:v1 -f Docker/Dockerfile .
       # diagnostic outpu
       - name: Verify Docker login
         run: docker info
