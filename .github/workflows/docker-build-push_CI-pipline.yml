@@ -16,7 +16,7 @@ jobs:
           username: ${{ secrets.DOCKER_USR }}
           password: ${{ secrets.DOCKER_PASS }}
           #updated the password in variable
-
+          
       # 3. Build Docker image
       - name: Build Docker image
         run: docker build -t kum18/helloworld-python:v1 .
