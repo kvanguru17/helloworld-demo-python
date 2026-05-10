@@ -13,8 +13,8 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: kum18
-          password: dckr_pat_NbfwsGOXdvwTY_U2_e9XM8X9tIo
+          username: DOCKER_USERNAME
+          password: DOCKER_PASSWORD
 
       # 3. Build Docker image
       - name: Build Docker image
