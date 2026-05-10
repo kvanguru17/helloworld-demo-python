@@ -1,0 +1,34 @@
+name: docker-build-push_CI-pipline
+run-name: ${{github.actor}}
+on: push
+jobs:
+  docker-build-push:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Log in to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: kum18
+          password: dckr_pat_NbfwsGOXdvwTY_U2_e9XM8X9tIo
+
+      # 3. Build Docker image
+      - name: Build Docker image
+        run: docker build -t kum18/helloworld-python:v1 .
+
+      # 4. Push Docker image
+      - name: Push Docker image
+        run: docker push kum18/helloworld-python:v1
+      
+      # 5.Run the container
+      - name: Run the container
+        run: docker run --name helloworld-demo-python -itd -p 8080:8080 kum18/helloworld-python:v1
+
+      # 6.view the image
+      - name: View the image
+        run: docker ps
+  
