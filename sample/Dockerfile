@@ -1,4 +1,4 @@
-FROM python:3.8-alpine
+FROM python:3.11-alpine
 RUN mkdir /app && \
     pip install --no-cache-dir --upgrade wheel==0.46.2
 COPY . /app
