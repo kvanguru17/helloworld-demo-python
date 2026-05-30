@@ -1,0 +1,27 @@
+name: Deploy Service
+on:
+  workflow_run:
+    workflows: ["Deploy to Kubernetes"]
+    types:
+      - completed
+
+jobs:
+  apply-service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply Kubernetes Service
+        run: |
+          kubectl apply -f - <<EOF
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: helloworld-python-service
+          spec:
+            type: NodePort
+            selector:
+              app: helloworld-python
+            ports:
+              - port: 8080
+                targetPort: 8080
+                nodePort: 30080
+          
