@@ -42,4 +42,49 @@ jobs:
       # 7. View the image
       - name: View the image
         run: docker ps
-  
+
+  k8s-implementation:
+    needs: docker-build-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Apply Kubernetes Manifests
+        run: |
+          kubectl apply -f - <<EOF
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: helloworld-python-deployment
+            labels:
+              app: helloworld-python
+          spec:
+            replicas: 2
+            selector:
+              matchLabels:
+                app: helloworld-python
+            template:
+              metadata:
+                labels:
+                  app: helloworld-python
+              spec:
+                containers:
+                - name: helloworld-python
+                  image: kum18/helloworld-python:v1
+                  ports:
+                  - containerPort: 8080
+          ---
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: helloworld-python-service
+          spec:
+            type: NodePort
+            selector:
+              app: helloworld-python
+            ports:
+              - port: 8080
+                targetPort: 8080
+                nodePort: 30080
+          EOF
