@@ -23,11 +23,6 @@ jobs:
         with:
           dockerfile: sample/Dockerfile
           ignore: DL4000,DL3020
-          #2.5 SonarQube
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v8.1.0 # Ex: v4.1.0 or sha1, See the latest version at https://github.com/marketplace/actions/official-sonarqube-scan
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}        
 
       # 3. Log in to Docker Hub
       - name: Log in to Docker Hub
