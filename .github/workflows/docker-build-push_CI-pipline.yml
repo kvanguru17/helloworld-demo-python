@@ -23,13 +23,12 @@ jobs:
         with:
           dockerfile: sample/Dockerfile
           ignore: DL4000,DL3020
-          
+
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v8.1.0 # Ex: v4.1.0 or sha1, See the latest version at https://github.com/marketplace/actions/official-sonarqube-scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-      - uses: actions/checkout@master
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/python@master
         env:
@@ -49,6 +48,7 @@ jobs:
       # diagnostic outpu
       - name: Verify Docker login
         run: docker info
+
 
       # 5. Push Docker image
       - name: Push Docker image
